@@ -1,13 +1,15 @@
-﻿# Introduction to R
 
-## Basics
 
-### Comments
+# Introduction to R
+
+## 1. Basics
+
+### a. Comments
 In R programming `#` is used to comment a code. If a particular line is commented in a script, when the script is executed, anything after a `#` will be ignored. There is no separate multi-line (a block comment) comments unlike other languages like HTML, SQL, JavaScript, Java etc.
 ```r
 #Calculate 5 + 7
 ```
-### Arithmetic
+### b. Arithmetic
 R can be used as a simple calculator. Consider the following arithmetic operators.
 
 - Addition: `+`
@@ -17,10 +19,10 @@ R can be used as a simple calculator. Consider the following arithmetic operator
 - Exponentiation: `^`
 - Modulo: `%%` - This returns the remainder of the division by left side of the number to the right side of the number. Eg. `10 %% 3` return 1 as a remainder.
 
-### Variable Assignment
+### c. Variable Assignment
  A variable allows you to store a value. The value can be accessed later with the variable name. There are two assignment operator in R. They are `<-` and `=`. The main difference between these two assignment operator is the scope of their variable. More info is [here](https://www.r-bloggers.com/assignment-operators-in-r-%E2%80%98%E2%80%99-vs-%E2%80%98-%E2%80%99/).
 
-### Basic data types in R
+### d. Basic data types in R
 
 1. Numerics (eg. 1.5)
 2. Integers (eg. 1) - Integers also a numerics in R
@@ -76,10 +78,10 @@ To identify the datatype of a variable you can use `class()` function.
 
   ---
 
-## Vectors
+## 2. Vectors
 Vector is a **one dimensional array** and it  can hold numeric, character or logical values. The elements in a vector all have the same data type.
 
-### Create a vector
+### a. Create a vector
 A vector can be created using combine function `c()`. The elements or values of a vector should be separated by a comma `,`.  The index of a first element of a vector is 1 not 0 as in many other programming languages (eg. Python, C, etc).
 
 For example.
@@ -119,7 +121,7 @@ class(x)
 ```
 Vector can also be created using sequence `seq` function. `seq(1:4)` creates a vector of c(1, 2, 3, 4).
 
-### Naming a vector
+### b. Naming a vector
 `names()` - To assign or get the names of each element of a vector.
 ```r
 x <- c("Norway", "Oslo")
@@ -127,7 +129,7 @@ names(x) <- c("Country", "Capital")
 names(x)
 #> [1] "Country" "Capital"
 ```
-### Calculation
+### c. Calculation
 If you sum two vectors in R, it takes the element-wise sum. The first element of vector 1 will be added with the first element of vector 2 and so on.
 ```r
 vector_1 <- c(1, 2, 3)
@@ -146,7 +148,7 @@ vector_2 %% vector_1
 vector_2 > vector_1
 #> [1] TRUE TRUE TRUE
 ```
-### Vector selection
+### d. Vector selection
 You can select only a few elements of a vector instead of all the elements.
 #### Selection by element number
 To filter the first element of a vector you type `vector_name[1]`. To select multiple elements from a vector, you have to pass a numeric vector with the indexes of the elements you wish to select. For example, if you want to select 2nd, 3rd and 4th element of a vector, you have to create a vector of these indexes. Then pass this newly created vector to filter the original vector. `vector_name[c(2,3,4)]`. There is an another way to do the same task. You can use a range instead of listing out all the sequential element index. `vector_name[2:4]`. The part `2:4` internally creates a vector `c(2, 3, 4)`. So either way works fine.
@@ -235,12 +237,12 @@ countries[selection]
 ```
 ---
 
-## Matrices
+## 3. Matrices
 A matrix is a **two dimensional array** and it can hold numeric, character or logical values. The elements in a matrix all have the same data type.
 
 A matrix can be created using a built in function `matrix()`. Let's see the below example.
 
-### Matrix construction
+### a. Matrix construction
 There are several ways to construct a matrix. When you construct a matrix with data elements, by default it will be filled along the columns. The default value of `byrow` parameter in matrix function is `FALSE`. So it should be changed to true if the data to be filled by row wise in matrix.
 ```r
 x <- matrix(
@@ -298,7 +300,7 @@ rbind(10:12, b = 1, "c++" = 2, d, deparse.level = 2)
 #> d        3    3    3
 ```
 
-### Matrix deconstruction
+### b. Matrix deconstruction
 Interestingly matrix can be deconstructed to vector (one dimension) using the combine function `c()`.
 ```r
 x <- matrix(
@@ -318,7 +320,7 @@ print(c(x)) #deconstruct the matrix
 #> [1] 1 4 7 2 5 8 3 6 9
 ```
 
-### Matrix selection
+### c. Matrix selection
 
 - Just like vector, we can use square brackets `[ ]` to select one or more elements from a matrix.
 - As matrix is a **two dimension**, we should specify row and column detail also. It should be separated by comma `,`.
@@ -353,7 +355,7 @@ x[2:3, 2:3] #select 2nd and 3rd rows and 2nd and 3rd columns.
 #> [1,]    5    6
 #> [2,]    8    9
 ```
-### Useful functions
+### d. Useful functions
 Operator / Function | Description
 :--------------------|:------------
 X * Y | Element-wise matrix multiplication
@@ -368,30 +370,30 @@ rownames(X) | Set row names of the matrix.
 colnames(X) | Set column/field names of the matrix.
 dimnames(X) | This function is used to set both row names and col names to a matrix. A list with row names and column name should be passed. Ex. `dimnames(X) < - list(c('A','B'), c('X', 'Y'))`
 ---
-## Factors
+## 4. Factors
 
 ---
-## Dataframe
+## 5. Dataframe
 A data frame is a **two dimensional objects** and it can hold numeric, character or logical values. Within a column all elements have the same data type, but different columns can be of different data type.
 
 ---
-## Lists
+## 6. Lists
 A list in R allows you to gather a variety of objects under one name (i.e, the name of the list) in an ordered way. The object can be vectors, matrices, data frame and even other lists. The length of the objects can be different. List is kind of a super datatype and you can practically store any information on it.
 
-### Create a list
+### a. Create a list
 `list()`
 
 #### Create a named list
 
-### List Selection
+### b. List Selection
 
-### Add a new object to list
+### c. Add a new object to list
 
 
 
-## Conditionals and Control flow
-### Relational operators
-### Logical operators
+## 7. Conditionals and Control flow
+### a. Relational operators
+### b. Logical operators
 
 It's important to note that the `else if` keywords comes on the same line as the closing bracket of the previous part of the control construct.
 
@@ -418,11 +420,11 @@ else (condition3) {
 }
 ```
 
-### Conditional statements
+### c. Conditional statements
 
-## Loops :loop:
-### While loop
-### For loop
+## 8. Loops :loop:
+### a. While loop
+### b. For loop
 #### Loops over a Vector
 
 #### Loops over a Matrix
@@ -432,11 +434,11 @@ The `break` statement quit the current active loop: the remaining code in the lo
 #### next
 The `next` statement skips the remainder of the code in the loop, but continues the iteration.
 
-## Functions
-### Introductions
+## 9. Functions
+### a. Introductions
 -> default value
 -> argument required or optional
-### Writing function
+### b. Writing function
 -> function with and without arguments
 -> function with default argument value
 -> function scoping
@@ -455,7 +457,7 @@ print(y)
 #> Error in print(y): object 'y' not found
 ```
 
-### Calling a function
+### c. Calling a function
 #### Arguments matching by position
 #### Arguments matching by name
 #### R passes arguments *by value* not *by reference*
@@ -473,7 +475,7 @@ print(x) #input value can not be changed by the function
 #> [1] 5
 ```
 
-### R packages
+### d. R packages
 * `install.packages()` - To install a new R packages from [CRAN](https://cran.r-project.org/).
 * `library()` which loads (i.e. attaches them to the search list) packages in R workspace.  To install packages, you need administrator privileges.
 * `search()`, to look at the currently attached packages in R workspace.
@@ -481,17 +483,142 @@ print(x) #input value can not be changed by the function
 #### Different ways to load a package
 library
 require
+attach?
 
 
-## The apply family
-### Why apply functions?
+## 10. The apply family
+### a. Why apply functions?
+***FOR LOOP vs APPLY
+### b. apply
 
-### lapply
+### c. lapply
 
-### sapply
-### vapply
+- apply function over a list or vector
+- output is always a list 
+- ( `l` in the `lapply` denotes list?)
 
-## Utilities
-### Useful functions
-### Regular expressions
-### Time :hourglass: and Date :date:
+#### lapply with built-in R function
+#### lapply with User defined function
+#### lapply with anonymous R function
+#### lapply with agruments
+
+### d. sapply
+
+- apply function over a list or vector
+- **try to simplify** the output to array (vector or matrix). If not possible, output will be a list. This is quite dangerous if we program assuming the output will be a vector or matrix.
+- *** (`s` in the `sapply` denotes simplify lapply?)
+- `sapply(*, simplify = FALSE, USE.NAMES = FALSE)` is equivalent to `lapply(*)`.
+
+```r
+# 1. Return a list with `lapply()`
+lapply(MyList,"[", 2, 1 )
+
+# 2. Return a list with `sapply()`
+sapply(MyList,"[", 2, 1, simplify=F)
+
+# 3. Return a vector with `sapply()`
+sapply(MyList,"[", 2, 1 )
+
+# 4. Return a vector with `unlist()`
+unlist(lapply(MyList,"[", 2, 1 ))
+```
+#### sapply with built-in R function
+#### sapply with User defined function
+#### sapply with anonymous R function
+#### sapply with agruments
+#### sapply with functions that returns null
+
+### e. vapply
+
+- apply function over a list or vector
+- output format is **explicitly specified**.
+- Syntax: `vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = T)`
+- Example: `vapply(states, nchar, numeric(1))`
+- The benefit of setting this new argument `FUN.VALUE` is if we expect `character(2)` (i.e, character with length 2)  as a output of a function and the function returns anything other than specified, it throws an error. So we can fix it.
+- `vapply` is safer than `sapply` if you want to simplify the result of `lapply`. `vapply` is a robust version of `sapply`. So, it is a good practice to use `vapply` in your R scripts.
+### f. rapply 
+rapply is a recursive version of lapply.
+### g. by?
+
+## 11. Utilities
+### a. Useful functions
+
+Functions | Description | Example
+--- | --- | ---
+ order() ||
+sort() |(asc/desc) argument `decreasing = T` is a default value. 
+identical() ||
+abs() ||
+round() ||
+ seq() ||
+rep() |Replicates elements of vector or list. Arguments: `times` and `each`|`rep(vector_x, each = 2)`
+append() ||
+rev() ||
+is.*() ||
+as.*() ||
+unlist() |To convert from a list to a vector|
+which() ||
+
+### b. Regular expressions
+- sequence of *meta*characters. i.e, `. \ | ( ) [ { ^ $ * + ?`
+- pattern existence
+- pattern replacement
+- pattern extraction
+- Very useful when you clean your data
+
+`grep`, `grepl`, `regexpr`, `gregexpr` and `regexec` search for matches to argument pattern within each element of a character vector: they differ in the *format of* and *amount of detail* in the results.
+
+- The strings in pattern should be enclosed by double quotes `""`.
+- `"^a"` - Starts with `a`
+- `"a$"` - Ends with `a`
+- `"a|e|i|o|u"` - The pipe `|` symbol is for logical OR operation.
+- `.*` - Any characters that matched zero (`.`) or more (`*`) times.
+- `\\` To escape any meta character, you have to use double back slash.
+- `\\s` - To match a space.
+- `[0-9]+` - To match the number 0 to 9, at least once (+).
+- `([0-9]+)` - The parentheses are used to make parts of the matching string available to define the replacement. The `\\1` in the replacement argument of `sub()` gets set to the string that is captured by the regular expression `[0-9]+`.
+```r
+token <- c("Token 2A", "Tkn 7B", "Number 3")
+sub(pattern=".*\\s([0-9]+).*$", replacement ="\\1", x = token)
+#> [1] "2" "7" "3"
+```
+
+
+#### grep() and grepl()
+- `grep` , which returns a vector of indices of the character strings that contains the pattern.
+- `grepl`, which returns TRUE when a pattern is found in the corresponding character string.
+- `grepl(pattern = <regex>, x = <string>)` where pattern is a regular expression and x is a character vector.
+```r
+states <- c("Karnataka", "Tamil Nadu", "Kerala", "Assam", "Andhra Pradesh")
+
+grep(pattern = "a$", x = states)
+#> [1] 1 3 5
+grepl(pattern = "a$", x = states)
+#> [1]  TRUE FALSE  TRUE FALSE  TRUE
+which(grepl(pattern = "a$", x = states))
+#> [1] 1 3 5
+```
+
+
+#### sub() gsub()
+`sub` and `gsub` perform replacement of the first and all matches respectively.
+`sub(pattern = <regex>, replacement = <string>, x = <character vector>)`
+
+
+
+### c. Time :hourglass: and Date :date:
+#### Sys.Date() and Sys.time()
+```r
+thedhi <- Sys.Date()
+class(thedhi)
+
+neram <- Sys.time()
+class(neram)
+```
+
+
+#### Useful R packages
+
+- lubridate
+- zoo
+- xts
