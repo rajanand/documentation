@@ -4,12 +4,16 @@
 
 ## 1. Basics
 
-### a. Comments
+### a. Help
+`?function_name` or `help(function_name)`
+Example: 
+`?sum` or `help(sum)` 
+### b. Comments
 In R programming `#` is used to comment a code. If a particular line is commented in a script, when the script is executed, anything after a `#` will be ignored. There is no separate multi-line (a block comment) comments unlike other languages like HTML, SQL, JavaScript, Java etc.
 ```r
 #Calculate 5 + 7
 ```
-### b. Arithmetic
+### c. Arithmetic
 R can be used as a simple calculator. Consider the following arithmetic operators.
 
 - Addition: `+`
@@ -19,10 +23,10 @@ R can be used as a simple calculator. Consider the following arithmetic operator
 - Exponentiation: `^`
 - Modulo: `%%` - This returns the remainder of the division by left side of the number to the right side of the number. Eg. `10 %% 3` return 1 as a remainder.
 
-### c. Variable Assignment
+### d. Variable Assignment
  A variable allows you to store a value. The value can be accessed later with the variable name. There are two assignment operator in R. They are `<-` and `=`. The main difference between these two assignment operator is the scope of their variable. More info is [here](https://www.r-bloggers.com/assignment-operators-in-r-%E2%80%98%E2%80%99-vs-%E2%80%98-%E2%80%99/).
 
-### d. Basic data types in R
+### e. Basic data types in R
 
 1. Numerics (eg. 1.5)
 2. Integers (eg. 1) - Integers also a numerics in R
@@ -369,7 +373,9 @@ colSums(X) | Returns vector of column sums.
 rownames(X) | Set row names of the matrix.
 colnames(X) | Set column/field names of the matrix.
 dimnames(X) | This function is used to set both row names and col names to a matrix. A list with row names and column name should be passed. Ex. `dimnames(X) < - list(c('A','B'), c('X', 'Y'))`
+
 ---
+
 ## 4. Factors
 
 ---
@@ -419,6 +425,8 @@ else (condition3) {
   expr3
 }
 ```
+if else condition in single line. ******
+`ifelse(test = x < 10, yes = 1, no = 2)`
 
 ### c. Conditional statements
 
@@ -433,7 +441,15 @@ else (condition3) {
 The `break` statement quit the current active loop: the remaining code in the loop is skipped and the loop is not iterated over anymore.
 #### next
 The `next` statement skips the remainder of the code in the loop, but continues the iteration.
-
+### c. repeat
+```r
+repeat {
+    code
+    if(condition) {
+        break
+    }
+}
+```
 ## 9. Functions
 ### a. Introductions
 -> default value
@@ -493,7 +509,7 @@ attach?
 
 ### c. lapply
 
-- apply function over a list or vector
+- apply a function over a list or vector
 - output is always a list 
 - ( `l` in the `lapply` denotes list?)
 
@@ -504,7 +520,7 @@ attach?
 
 ### d. sapply
 
-- apply function over a list or vector
+- apply a function over a list or vector
 - **try to simplify** the output to array (vector or matrix). If not possible, output will be a list. This is quite dangerous if we program assuming the output will be a vector or matrix.
 - *** (`s` in the `sapply` denotes simplify lapply?)
 - `sapply(*, simplify = FALSE, USE.NAMES = FALSE)` is equivalent to `lapply(*)`.
@@ -530,7 +546,7 @@ unlist(lapply(MyList,"[", 2, 1 ))
 
 ### e. vapply
 
-- apply function over a list or vector
+- apply a function over a list or vector
 - output format is **explicitly specified**.
 - Syntax: `vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = T)`
 - Example: `vapply(states, nchar, numeric(1))`
@@ -611,9 +627,102 @@ which(grepl(pattern = "a$", x = states))
 ```r
 thedhi <- Sys.Date()
 class(thedhi)
+#> [1] "Date"
 
 neram <- Sys.time()
 class(neram)
+#> [1] "POSIXct" "POSIXt"
+```
+Note that "D" in `Sys.Date()` is in uppercase and "t" in `Sys.time()` is in lowercase.
+
+#### Create Date objects
+- `as.Date("1990-01-14")`
+- default date format `%Y-%m-%d` where `%Y` is 4 digit year,  `%m` is 2 digit month and `%d` is 2 digit year.
+- If you want to convert a string with different format to date, you can specify it in the `format` argument. 
+- `as.Date("1990-14-01", format = "%Y-%d-%m")`
+
+format | description
+---|---
+`%Y`| 4-digit year (1992)
+`%y`| 2-digit year (92)
+`%m`| 2-digit month (02)
+`%d`| 2-digit day of the month (11)
+`%A`| weekday (Tuesday)
+`%a`| abbreviated weekday (Tue)
+`%B`| month (February)
+`%b`| abbreviated month (Feb)
+
+#### Create POSIXct objects
+- POSIX**ct** - ct means calendar time.
+- `as.POSIXct("1990-01-14 23:12:43")` to create `POSIXct` object from string.
+- You can use `format` argument to convert if the date is in different format.
+
+format | description
+---|---
+`%H`| hours as a decimal number (00-23).
+`%I`| hours as a decimal number (01-12).
+`%M`| minutes as a decimal number.
+`%S`| seconds as a decimal number.
+`%T`| shorthand notation for the typical format `%H:%M:%S`.
+`%p`| AM/PM indicator.
+
+The full list of date and time conversion function is available in `strptime` documentation.
+
+#### Date and POSIXct arithmetic
+
+```r
+Sys.Date()
+#> [1] "2017-12-15"
+
+Sys.Date() + 1 # 1 day is added.
+#> [1] "2017-12-16"
+
+as.Date("2017-12-15 00:00:20")-as.Date("2017-12-15 00:00:00")
+#> Time difference of 0 days
+
+as.Date("2017-12-15 00:20:00")-as.Date("2017-12-15 00:00:00")
+#> Time difference of 0 days
+
+as.Date("2017-12-15 20:00:00")-as.Date("2017-12-15 00:00:00")
+#> Time difference of 0 days
+
+as.Date("2017-12-15 12:00:00")-as.Date("2016-12-15 00:00:00")
+#> Time difference of 365 days
+```
+```r
+Sys.time()
+#> [1] "2017-12-15 09:35:58 IST"
+
+Sys.time()+1 # 1 second is added.
+#> [1] "2017-12-15 09:35:59 IST"
+
+as.POSIXct("2017-12-15 00:00:20")-as.POSIXct("2017-12-15 00:00:00")
+#> Time difference of 20 secs
+
+as.POSIXct("2017-12-15 00:20:00")-as.POSIXct("2017-12-15 00:00:00")
+#> Time difference of 20 mins
+
+as.POSIXct("2017-12-15 20:00:00")-as.POSIXct("2017-12-15 00:00:00")
+#> Time difference of 20 hours
+
+as.POSIXct("2017-12-15 00:00:00")-as.POSIXct("2016-12-15 00:00:00")
+#> Time difference of 365 days
+
+as.POSIXct("2017-12-15 12:00:00")-as.POSIXct("2016-12-15 00:00:00")
+#> Time difference of 365.5 days
+```
+
+#### Under the hood
+- R stores the date as a simple number. The number of days since 1970-01-01.
+- `unclass` - To see the numeric value.
+```r
+# no. of days since January 1st, 1970
+unclass(as.Date("1970-01-01"))
+#> [1] 0
+unclass(as.Date("1970-01-02"))
+#> [1] 1
+unclass(as.Date("1969-12-31"))
+#> [1] -1
 ```
 
 
@@ -622,3 +731,45 @@ class(neram)
 - lubridate
 - zoo
 - xts
+
+
+# to-do
+
+is.vector
+
+matrix - 2d vector
+cor() - correlation -1 to 1 ; 1 positve linear relationship; -1 negative 
+cor() example with vector input and matrix input
+
+dataframe subsets
+debt[1:3, 2] returna vector with 3 element. if you want dataframe as a result then debt[1:3, 2, drop = FALSE].
+subset() function to manipulate data frame.
+
+factor:
+under the hood R stores the factor as integer vector
+cut() function
+to put value into buckets (0-10, 11-20, 21-30 etc) when creating factors.
+ordered(factor_name) to see what order has R stored the levels of factor.
+```r
+x<-factor(c("low", "high", "low", "medium", "low", "high", "high", "medium"), ordered = T, levels = c("low","medium", "high"))
+x
+ordered(x)
+```
+drop levels
+
+list:
+a few list creating functions
+split()
+unsplit()
+attributes(function_name)
+
+
+Coerce it:
+It is important to remember that a vector can only be composed of one data type. This means that you cannot have both a numeric and a character in the same vector. If you attempt to do this, the lower ranking type will be coerced into the higher ranking type.
+For example: c(1.5, "hello") results in c("1.5", "hello") where the numeric 1.5 has been coerced into the character data type.
+The hierarchy for coercion is:
+logical < integer < numeric < character
+
+
+---
+Last updated on 2017-12-15
